@@ -1,0 +1,35 @@
+spring:
+  application:
+    name: auth-service
+  config:
+    import: optional:file:.env[.properties]
+  h2:
+    console:
+      enabled: true
+      path: /h2-console
+  datasource:
+      url: jdbc:h2:mem:testdb
+      driver-class-name: org.h2.Driver
+      username: sa
+      password: test1234
+  jpa:
+      database-platform: org.hibernate.dialect.H2Dialect
+      hibernate:
+        ddl-auto: create-drop
+      show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
+
+service:
+  jwt:
+    secret-key: "TWFuIGlzIGRpc3Rpbmd1aXNoZWQsIG5vdCBvbmx5IGJ5IGhpcyByZWFzb24sIGJ1dCBieSB0aGlz"
+    access:
+      expiration: ${JWT_ACCESS_EXPIRATION}
+    refresh:
+      expiration: ${JWT_REFRESH_EXPIRATION}
+
+server:
+  port: 19095
